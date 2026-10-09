@@ -1,173 +1,483 @@
 <!DOCTYPE html>
 <html lang="en" class="dark">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101010">
+  <title>Anghel | Portfolio</title>
 
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
-    <style type="text/tailwindcss">
-        @custom-variant dark (&:where(.dark, .dark *));
-    </style>
+  <style type="text/tailwindcss">
+    @custom-variant dark (&:where(.dark, .dark *));
+
+    @layer base {
+      * {
+        @apply box-border;
+      }
+
+      html {
+        @apply scroll-smooth;
+      }
+
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      a {
+        @apply no-underline;
+      }
+
+      button, input, textarea {
+        font: inherit;
+      }
+
+      ::selection {
+        @apply bg-[#eaff00] text-[#171717];
+      }
+    }
+
+    @layer components {
+      .brutal-card {
+        @apply border-[3px] border-[#171717] transition-all duration-150;
+        box-shadow: 6px 6px 0 #171717;
+      }
+
+      .brutal-card:hover {
+        @apply -translate-x-[3px] -translate-y-[3px];
+        box-shadow: 9px 9px 0 #171717;
+      }
+
+      .brutal-button {
+        @apply inline-flex items-center justify-center gap-2
+          border-[3px] border-[#171717]
+          bg-[#eaff00] px-5 py-3
+          text-[13px] font-black uppercase text-[#171717]
+          shadow-[4px_4px_0_#171717]
+          cursor-pointer transition-all duration-150;
+      }
+
+      .brutal-button:hover {
+        @apply translate-x-[3px] translate-y-[3px]
+          shadow-[1px_1px_0_#171717];
+      }
+
+      .btn-primary {
+        @apply inline-flex items-center justify-center gap-2
+          border-[3px] border-[#171717]
+          bg-[#eaff00] px-5 py-3
+          text-[13px] font-black uppercase text-[#171717]
+          shadow-[4px_4px_0_#171717]
+          cursor-pointer transition-all duration-150;
+      }
+
+      .btn-primary:hover {
+        @apply translate-x-[3px] translate-y-[3px]
+          shadow-[1px_1px_0_#171717];
+      }
+
+      .brutal-input {
+        @apply block w-full rounded-none border-[3px]
+          border-[#171717] bg-[#f4f0e8] p-3
+          text-sm text-[#171717]
+          placeholder:text-neutral-700
+          focus:outline-2 focus:outline-offset-2
+          focus:outline-[#171717];
+      }
+
+      .section-label {
+        @apply mb-2 text-xs font-black uppercase
+          tracking-[2px] text-[#171717] dark:text-[#eaff00];
+      }
+
+      .section-title {
+        @apply mb-8 text-5xl font-black uppercase
+          tracking-tighter sm:text-7xl;
+      }
+
+      .accent-text {
+        @apply text-[#171717] dark:text-[#eaff00];
+      }
+
+      .dark .brutal-card {
+        @apply border-[#f4f0e8];
+        box-shadow: 6px 6px 0 #eaff00;
+      }
+
+      .dark .brutal-button {
+        @apply border-[#f4f0e8];
+        box-shadow: 4px 4px 0 #f4f0e8;
+      }
+
+      .dark .brutal-button:hover {
+        box-shadow: 1px 1px 0 #f4f0e8;
+      }
+
+      .dark .btn-primary {
+        @apply border-[#171717];
+        box-shadow: 4px 4px 0 #171717;
+      }
+
+      .dark .btn-primary:hover {
+        box-shadow: 1px 1px 0 #171717;
+      }
+
+      .dark .brutal-input {
+        @apply border-[#171717] bg-[#f4f0e8] text-[#171717];
+      }
+    }
+  </style>
 </head>
 
-<body class="bg-gray-100 text-slate-900 dark:bg-slate-900 dark:text-white">
+<body class="bg-[#f4f0e8] text-[#171717] dark:bg-[#101010] dark:text-[#f4f0e8]">
 
-    <h1 class="bg-black p-3 text-center text-3xl font-bold text-white">
-        Anghel Dy
-    </h1>
+  <!-- HEADER -->
+  <header class="mx-auto max-w-6xl px-5 pt-6 sm:px-8">
+    <nav class="flex flex-wrap items-center justify-between gap-4 border-b-[3px] border-[#171717] pb-5 dark:border-[#f4f0e8]">
 
-    <div class="mt-4 flex justify-center">
-        <button
-            id="toggledark"
-            type="button"
-            class="rounded-lg bg-blue-600 px-5 py-2 font-medium text-white transition hover:bg-blue-700">
-            Toggle
+      <a href="#home" class="text-xl font-black">
+        @http.anghell<span class="accent-text">.</span>
+      </a>
+
+      <div class="flex flex-wrap items-center gap-4 text-xs font-black uppercase sm:gap-6">
+        <a href="#projects" class="transition-colors hover:bg-[#eaff00] hover:text-[#171717]">Projects ↘</a>
+        <a href="#services" class="transition-colors hover:bg-[#eaff00] hover:text-[#171717]">What I Do ↘</a>
+        <a href="#contact" class="transition-colors hover:bg-[#eaff00] hover:text-[#171717]">Contact ↘</a>
+
+        <button id="toggledark" type="button" class="btn-primary !px-3 !py-2">
+          ☾ / ☀
         </button>
-    </div>
+      </div>
+    </nav>
+  </header>
 
-    <header class="mt-8">
-        <nav class="mx-auto flex max-w-4xl items-center justify-between px-6">
+  <main id="home" class="mx-auto max-w-6xl px-5 py-12 sm:px-8">
 
-            <span class="font-semibold text-gray-800 dark:text-white">
-                @http.anghell
-            </span>
+    <!-- HERO -->
+    <section class="grid items-stretch gap-8 md:grid-cols-[1.5fr_1fr]">
 
-            <ul class="flex gap-6">
-                <li>
-                    <a href="#projects"
-                        class="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">
-                        Projects
-                    </a>
-                </li>
+      <div class="flex flex-col justify-center">
 
-                <li>
-                    <a href="#services"
-                        class="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">
-                        Services
-                    </a>
-                </li>
+        <p class="mb-5 w-fit -rotate-2 border-[3px] border-[#171717] bg-[#eaff00] px-3 py-2 text-xs font-black uppercase text-[#171717] shadow-[4px_4px_0_#171717]">
+          Available for new projects ✳
+        </p>
 
-                <li>
-                    <a href="#contact"
-                        class="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">
-                        Contact Me
-                    </a>
-                </li>
-            </ul>
+        <h1 class="text-6xl font-black uppercase leading-[0.88] tracking-tighter sm:text-8xl lg:text-[110px]">
+          I'M
+          <span class="block accent-text">ANGHEL</span>
+          <span class="mt-3 block text-4xl leading-tight sm:text-6xl">
+            AND I BUILD DIGITAL THINGS.
+          </span>
+        </h1>
 
-        </nav>
-    </header>
+        <p class="mt-8 max-w-lg text-lg font-bold">
+          Developer. Systems thinker. Automation enthusiast.
+          Turning problems into useful digital experiences.
+        </p>
 
-    <main class="min-h-screen p-10">
+        <div class="mt-8 flex flex-wrap gap-4">
+          <a href="#projects" class="btn-primary">
+            Explore my work ↘
+          </a>
 
-        <div class="mx-auto max-w-3xl space-y-8">
+          <a href="#contact" class="brutal-button !bg-[#f4f0e8] dark:!bg-[#101010] dark:!text-[#f4f0e8]">
+            Let's talk +
+          </a>
+        </div>
+      </div>
 
-            <div class="rounded-xl border border-gray-200 bg-white p-6 shadow-lg dark:border-slate-700 dark:bg-slate-800">
-                <section id="projects"
-                    class="rounded-lg bg-gray-100 p-6 text-slate-900 dark:bg-slate-900 dark:text-white">
+      <div class="brutal-card flex min-h-64 flex-col justify-between bg-[#eaff00] p-6 text-[#171717] sm:p-8">
 
-                    <h2 class="text-2xl font-bold">
-                        My Projects
-                    </h2>
-
-                    <p class="mt-3 text-gray-600 dark:text-gray-300">
-                        Personal portfolio, payroll system, company website,
-                        startup website, and compliance monitoring system.
-                    </p>
-
-                </section>
-            </div>
-
-            <div class="rounded-xl border border-gray-200 bg-white p-6 shadow-lg dark:border-slate-700 dark:bg-slate-800">
-                <section id="services"
-                    class="rounded-lg bg-gray-100 p-6 text-slate-900 dark:bg-slate-900 dark:text-white">
-
-                    <h2 class="text-2xl font-bold">
-                        My Services
-                    </h2>
-
-                    <p class="mt-3 text-gray-600 dark:text-gray-300">
-                        Website Creation, System Creation, AI Automation,
-                        Database Management, Project Management, Systems Analyst.
-                    </p>
-
-                </section>
-            </div>
-
-            <div class="rounded-xl border border-gray-200 bg-white p-6 shadow-lg dark:border-slate-700 dark:bg-slate-800">
-                <section id="contact"
-                    class="rounded-lg bg-gray-100 p-6 text-slate-900 dark:bg-slate-900 dark:text-white">
-
-                    <h2 class="text-2xl font-bold">
-                        Let's build together!
-                    </h2>
-
-                    <form action="#" method="post" class="mt-6 space-y-4">
-
-                        <div>
-                            <label for="name" class="mb-1 block">
-                                Name
-                            </label>
-
-                            <input
-                                type="text"
-                                id="name"
-                                name="name"
-                                required
-                                class="w-full rounded-lg border border-gray-300 bg-white p-3 text-slate-900 outline-none focus:border-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white">
-                        </div>
-
-                        <div>
-                            <label for="email" class="mb-1 block">
-                                Email
-                            </label>
-
-                            <input
-                                type="email"
-                                id="email"
-                                name="email"
-                                required
-                                class="w-full rounded-lg border border-gray-300 bg-white p-3 text-slate-900 outline-none focus:border-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white">
-                        </div>
-
-                        <div>
-                            <label for="message" class="mb-1 block">
-                                Message
-                            </label>
-
-                            <textarea
-                                id="message"
-                                name="message"
-                                rows="5"
-                                required
-                                class="w-full rounded-lg border border-gray-300 bg-white p-3 text-slate-900 outline-none focus:border-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white"></textarea>
-                        </div>
-
-                        <button
-                            type="submit"
-                            class="rounded-lg bg-blue-600 px-5 py-3 font-medium text-white transition hover:bg-blue-700">
-                            Send Message
-                        </button>
-
-                    </form>
-                </section>
-            </div>
-
+        <div class="flex justify-between">
+          <span class="text-xs font-black uppercase">Portfolio / 2026</span>
+          <span class="text-4xl font-black">✳</span>
         </div>
 
-    </main>
+        <div>
+          <p class="text-sm font-bold uppercase">Independent digital builder</p>
+          <p class="mt-2 text-5xl font-black uppercase leading-none">
+            CODE.<br>CREATE.<br>REPEAT.
+          </p>
+        </div>
 
-    <script>
-        const tb = document.querySelector("#toggledark");
-        const html = document.querySelector("html");
+        <div class="flex justify-between border-t-[3px] border-[#171717] pt-3 text-xs font-black uppercase">
+          <span>Web / Systems / AI</span>
+          <span>001—026</span>
+        </div>
+      </div>
+    </section>
 
-        tb.addEventListener("click", function () {
-            html.classList.toggle("dark");
-        });
-    </script>
+    <!-- MARQUEE -->
+    <div class="my-16 -rotate-1 border-y-[3px] border-[#171717] bg-[#171717] py-4 text-center text-[#eaff00]">
+      <p class="font-black uppercase tracking-widest">
+        Build different ✳ Think bigger ✳ Ship better ✳
+      </p>
+    </div>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="scroll-mt-8 py-4">
+
+      <p class="section-label">01 / Selected work</p>
+
+      <h2 class="section-title">
+        The Projects<span class="accent-text">.</span>
+      </h2>
+
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+
+        <article class="brutal-card bg-[#f4f0e8] p-5 text-[#171717] dark:bg-[#101010] dark:text-[#f4f0e8]">
+
+          <div class="mb-5 flex aspect-[4/3] items-center justify-center border-[3px] border-[#171717] bg-[#eaff00] text-6xl font-black text-[#171717]">
+            WEB↗
+          </div>
+
+          <p class="text-xs font-black uppercase">PROJECT / 001</p>
+          <h3 class="mt-2 text-2xl font-black uppercase">Personal Portfolio</h3>
+          <p class="mt-3 text-sm">
+            A bold digital home for showcasing skills, ideas, and creative work.
+          </p>
+        </article>
+
+        <article class="brutal-card bg-[#f4f0e8] p-5 text-[#171717] dark:bg-[#101010] dark:text-[#f4f0e8]">
+
+          <div class="mb-5 flex aspect-[4/3] items-center justify-center border-[3px] border-[#171717] bg-[#eaff00] text-5xl font-black text-[#171717]">
+            SYSTEM
+          </div>
+
+          <p class="text-xs font-black uppercase">PROJECT / 002</p>
+          <h3 class="mt-2 text-2xl font-black uppercase">Payroll System</h3>
+          <p class="mt-3 text-sm">
+            A system for simplifying employee records and payroll workflows.
+          </p>
+        </article>
+
+        <article class="brutal-card bg-[#eaff00] p-5 text-[#171717]">
+
+          <span class="text-5xl font-black">???</span>
+
+          <h3 class="mt-6 text-3xl font-black uppercase">
+            Your project could be next.
+          </h3>
+
+          <p class="mt-4 text-sm font-bold">
+            Let's turn your idea into something real.
+          </p>
+
+          <a href="#contact" class="brutal-button mt-8 !border-[#171717] !bg-[#171717] !text-[#eaff00] !shadow-[4px_4px_0_#f4f0e8]">
+            Start a project ↗
+          </a>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="scroll-mt-8 py-20">
+
+      <p class="section-label">02 / What I do</p>
+
+      <h2 class="section-title">
+        Useful skills.<br>Real solutions.
+      </h2>
+
+      <div class="grid gap-4 sm:grid-cols-2">
+
+        <article class="brutal-card flex gap-4 bg-[#f4f0e8] p-5 text-[#171717] dark:bg-[#101010] dark:text-[#f4f0e8]">
+          <span class="text-3xl font-black">01</span>
+          <div>
+            <h3 class="text-xl font-black uppercase">Website Creation</h3>
+            <p class="mt-2 text-sm">Responsive websites with distinctive visual identities.</p>
+          </div>
+        </article>
+
+        <article class="brutal-card flex gap-4 bg-[#f4f0e8] p-5 text-[#171717] dark:bg-[#101010] dark:text-[#f4f0e8]">
+          <span class="text-3xl font-black">02</span>
+          <div>
+            <h3 class="text-xl font-black uppercase">System Development</h3>
+            <p class="mt-2 text-sm">Applications that organize workflows and reduce repetitive tasks.</p>
+          </div>
+        </article>
+
+        <article class="brutal-card flex gap-4 bg-[#f4f0e8] p-5 text-[#171717] dark:bg-[#101010] dark:text-[#f4f0e8]">
+          <span class="text-3xl font-black">03</span>
+          <div>
+            <h3 class="text-xl font-black uppercase">AI Automation</h3>
+            <p class="mt-2 text-sm">Smarter workflows using automation and AI-assisted processes.</p>
+          </div>
+        </article>
+
+        <article class="brutal-card flex gap-4 bg-[#f4f0e8] p-5 text-[#171717] dark:bg-[#101010] dark:text-[#f4f0e8]">
+          <span class="text-3xl font-black">04</span>
+          <div>
+            <h3 class="text-xl font-black uppercase">Database Management</h3>
+            <p class="mt-2 text-sm">Structured data and reliable information workflows.</p>
+          </div>
+        </article>
+
+        <article class="brutal-card flex gap-4 bg-[#f4f0e8] p-5 text-[#171717] dark:bg-[#101010] dark:text-[#f4f0e8]">
+          <span class="text-3xl font-black">05</span>
+          <div>
+            <h3 class="text-xl font-black uppercase">Project Management</h3>
+            <p class="mt-2 text-sm">Planning tasks, setting priorities, and coordinating delivery.</p>
+          </div>
+        </article>
+
+        <article class="brutal-card flex gap-4 bg-[#f4f0e8] p-5 text-[#171717] dark:bg-[#101010] dark:text-[#f4f0e8]">
+          <span class="text-3xl font-black">06</span>
+          <div>
+            <h3 class="text-xl font-black uppercase">Systems Analysis</h3>
+            <p class="mt-2 text-sm">Identifying bottlenecks and designing better processes.</p>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="scroll-mt-8 border-[3px] border-[#171717] bg-[#eaff00] p-6 text-[#171717] shadow-[6px_6px_0_#171717] sm:p-10">
+
+      <div class="grid gap-10 md:grid-cols-2">
+
+        <div>
+          <p class="mb-4 text-xs font-black uppercase tracking-widest">
+            03 / Get in touch
+          </p>
+
+          <h2 class="text-5xl font-black uppercase leading-[0.9] tracking-tighter sm:text-7xl">
+            LET'S<br>MAKE<br>IT HAPPEN.
+          </h2>
+
+          <p class="mt-6 font-bold leading-relaxed">
+            Have a website, system, or automation idea?
+            Let's discuss what we can build.
+          </p>
+        </div>
+
+        <form id="contactForm" class="space-y-5">
+
+          <div>
+            <label for="name" class="mb-2 block text-sm font-black uppercase">
+              Your name *
+            </label>
+
+            <input
+              class="brutal-input"
+              type="text"
+              id="name"
+              name="name"
+              autocomplete="name"
+              required
+              placeholder="YOUR NAME">
+          </div>
+
+          <div>
+            <label for="email" class="mb-2 block text-sm font-black uppercase">
+              Your email *
+            </label>
+
+            <input
+              class="brutal-input"
+              type="email"
+              id="email"
+              name="email"
+              autocomplete="email"
+              required
+              placeholder="YOU@EXAMPLE.COM">
+          </div>
+
+          <div>
+            <label for="message" class="mb-2 block text-sm font-black uppercase">
+              Your message *
+            </label>
+
+            <textarea
+              class="brutal-input"
+              id="message"
+              name="message"
+              rows="5"
+              required
+              placeholder="TELL ME ABOUT YOUR IDEA"></textarea>
+          </div>
+
+          <button type="submit" class="btn-primary w-full">
+            Send Message ↗
+          </button>
+
+          <p id="formStatus" class="text-sm font-bold" role="status" aria-live="polite"></p>
+        </form>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="mx-auto mt-12 max-w-6xl border-t-[3px] border-[#171717] px-5 py-8 dark:border-[#f4f0e8] sm:px-8">
+
+    <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+
+      <p class="text-xl font-black">
+        @http.anghell<span class="accent-text">.</span>
+      </p>
+
+      <p class="text-xs font-bold uppercase">
+        Designed to stand out. © <span id="year"></span>
+      </p>
+
+      <a href="#home" class="text-sm font-black uppercase underline decoration-4 underline-offset-4 hover:bg-[#eaff00] hover:text-[#171717]">
+        Back to top ↑
+      </a>
+
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT -->
+  <script>
+    const html = document.documentElement;
+    const themeButton = document.querySelector("#toggledark");
+    const themeColor = document.querySelector('meta[name="theme-color"]');
+
+    function updateThemeColor() {
+      themeColor.content = html.classList.contains("dark")
+        ? "#101010"
+        : "#f4f0e8";
+    }
+
+    try {
+      const savedTheme = localStorage.getItem("portfolio-theme");
+
+      if (savedTheme === "light") {
+        html.classList.remove("dark");
+      } else if (savedTheme === "dark") {
+        html.classList.add("dark");
+      }
+    } catch (error) {}
+
+    updateThemeColor();
+
+    themeButton.addEventListener("click", () => {
+      html.classList.toggle("dark");
+
+      try {
+        localStorage.setItem(
+          "portfolio-theme",
+          html.classList.contains("dark") ? "dark" : "light"
+        );
+      } catch (error) {}
+
+      updateThemeColor();
+    });
+
+    document.querySelector("#year").textContent =
+      new Date().getFullYear();
+
+    document.querySelector("#contactForm").addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      document.querySelector("#formStatus").textContent =
+        "Form validated! Connect an email service or backend to deliver messages.";
+    });
+  </script>
 
 </body>
 </html>
