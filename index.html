@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#101010">
+  <meta name="description" content="Anghel's portfolio showcasing web development, systems, and automation projects.">
   <title>Anghel | Portfolio</title>
 
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
@@ -12,24 +13,22 @@
     @custom-variant dark (&:where(.dark, .dark *));
 
     @layer base {
-      * {
-        @apply box-border;
+      * { @apply box-border; }
+
+      html { @apply scroll-smooth; }
+
+      body { font-family: Arial, Helvetica, sans-serif; }
+
+      a { @apply no-underline; }
+
+      button, input, textarea { font: inherit; }
+
+      button, a, input, textarea {
+        @apply focus-visible:outline-2 focus-visible:outline-offset-4;
       }
 
-      html {
-        @apply scroll-smooth;
-      }
-
-      body {
-        font-family: Arial, Helvetica, sans-serif;
-      }
-
-      a {
-        @apply no-underline;
-      }
-
-      button, input, textarea {
-        font: inherit;
+      button, a {
+        @apply focus-visible:outline-[#eaff00];
       }
 
       ::selection {
@@ -39,48 +38,43 @@
 
     @layer components {
       .brutal-card {
-        @apply border-[3px] border-[#171717] transition-all duration-150;
+        @apply border-[3px] border-[#171717];
         box-shadow: 6px 6px 0 #171717;
       }
 
       .brutal-card:hover {
-        @apply -translate-x-[3px] -translate-y-[3px];
         box-shadow: 9px 9px 0 #171717;
       }
 
-      .brutal-button {
+      .brutal-button,
+      .btn-primary {
         @apply inline-flex items-center justify-center gap-2
-          border-[3px] border-[#171717]
-          bg-[#eaff00] px-5 py-3
-          text-[13px] font-black uppercase text-[#171717]
-          shadow-[4px_4px_0_#171717]
-          cursor-pointer transition-all duration-150;
+          border-[3px] px-5 py-3 text-[13px] font-black
+          uppercase cursor-pointer;
+      }
+
+      .brutal-button {
+        @apply border-[#171717] bg-[#eaff00] text-[#171717];
+        box-shadow: 4px 4px 0 #171717;
       }
 
       .brutal-button:hover {
-        @apply translate-x-[3px] translate-y-[3px]
-          shadow-[1px_1px_0_#171717];
+        box-shadow: 1px 1px 0 #171717;
       }
 
       .btn-primary {
-        @apply inline-flex items-center justify-center gap-2
-          border-[3px] border-[#171717]
-          bg-[#eaff00] px-5 py-3
-          text-[13px] font-black uppercase text-[#171717]
-          shadow-[4px_4px_0_#171717]
-          cursor-pointer transition-all duration-150;
+        @apply border-[#171717] bg-[#eaff00] text-[#171717];
+        box-shadow: 4px 4px 0 #171717;
       }
 
       .btn-primary:hover {
-        @apply translate-x-[3px] translate-y-[3px]
-          shadow-[1px_1px_0_#171717];
+        box-shadow: 1px 1px 0 #171717;
       }
 
       .brutal-input {
         @apply block w-full rounded-none border-[3px]
           border-[#171717] bg-[#f4f0e8] p-3
-          text-sm text-[#171717]
-          placeholder:text-neutral-700
+          text-sm text-[#171717] placeholder:text-neutral-700
           focus:outline-2 focus:outline-offset-2
           focus:outline-[#171717];
       }
@@ -104,8 +98,12 @@
         box-shadow: 6px 6px 0 #eaff00;
       }
 
+      .dark .brutal-card:hover {
+        box-shadow: 9px 9px 0 #eaff00;
+      }
+
       .dark .brutal-button {
-        @apply border-[#f4f0e8];
+        @apply border-[#f4f0e8] bg-[#101010] text-[#f4f0e8];
         box-shadow: 4px 4px 0 #f4f0e8;
       }
 
@@ -126,26 +124,40 @@
         @apply border-[#171717] bg-[#f4f0e8] text-[#171717];
       }
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
   </style>
 </head>
 
 <body class="bg-[#f4f0e8] text-[#171717] dark:bg-[#101010] dark:text-[#f4f0e8]">
 
-  <!-- HEADER -->
   <header class="mx-auto max-w-6xl px-5 pt-6 sm:px-8">
-    <nav class="flex flex-wrap items-center justify-between gap-4 border-b-[3px] border-[#171717] pb-5 dark:border-[#f4f0e8]">
+    <nav class="flex flex-wrap items-center justify-between gap-4 border-b-[3px] border-[#171717] pb-5 dark:border-[#f4f0e8]"
+      aria-label="Main navigation">
 
       <a href="#home" class="text-xl font-black">
         @http.anghell<span class="accent-text">.</span>
       </a>
 
       <div class="flex flex-wrap items-center gap-4 text-xs font-black uppercase sm:gap-6">
-        <a href="#projects" class="transition-colors hover:bg-[#eaff00] hover:text-[#171717]">Projects ↘</a>
-        <a href="#services" class="transition-colors hover:bg-[#eaff00] hover:text-[#171717]">What I Do ↘</a>
-        <a href="#contact" class="transition-colors hover:bg-[#eaff00] hover:text-[#171717]">Contact ↘</a>
+        <a href="#projects" class="hover:bg-[#eaff00] hover:text-[#171717]">Projects ↘</a>
+        <a href="#services" class="hover:bg-[#eaff00] hover:text-[#171717]">What I Do ↘</a>
+        <a href="#contact" class="hover:bg-[#eaff00] hover:text-[#171717]">Contact ↘</a>
 
-        <button id="toggledark" type="button" class="btn-primary !px-3 !py-2">
+        <button id="toggledark" type="button"
+          class="btn-primary !px-3 !py-2"
+          aria-label="Switch color theme"
+          aria-pressed="true">
           ☾ / ☀
+        </button>
+
+        <button id="refresh" type="button"
+          class="btn-primary !px-3 !py-2"
+          aria-label="Switch color theme"
+          aria-pressed="true">
+          Refresh ˚⟡˖
         </button>
       </div>
     </nav>
@@ -153,12 +165,10 @@
 
   <main id="home" class="mx-auto max-w-6xl px-5 py-12 sm:px-8">
 
-    <!-- HERO -->
     <section class="grid items-stretch gap-8 md:grid-cols-[1.5fr_1fr]">
-
       <div class="flex flex-col justify-center">
 
-        <p class="mb-5 w-fit -rotate-2 border-[3px] border-[#171717] bg-[#eaff00] px-3 py-2 text-xs font-black uppercase text-[#171717] shadow-[4px_4px_0_#171717]">
+        <p class="mb-5 w-fit border-[3px] border-[#171717] bg-[#eaff00] px-3 py-2 text-xs font-black uppercase text-[#171717] shadow-[4px_4px_0_#171717]">
           Available for new projects ✳
         </p>
 
@@ -176,21 +186,15 @@
         </p>
 
         <div class="mt-8 flex flex-wrap gap-4">
-          <a href="#projects" class="btn-primary">
-            Explore my work ↘
-          </a>
-
-          <a href="#contact" class="brutal-button !bg-[#f4f0e8] dark:!bg-[#101010] dark:!text-[#f4f0e8]">
-            Let's talk +
-          </a>
+          <a href="#projects" class="btn-primary">Explore my work ↘</a>
+          <a href="#contact" class="brutal-button">Let's talk +</a>
         </div>
       </div>
 
-      <div class="brutal-card flex min-h-64 flex-col justify-between bg-[#eaff00] p-6 text-[#171717] sm:p-8">
-
+      <div id="box" class="brutal-card flex min-h-64 flex-col justify-between bg-[#eaff00] p-6 text-[#171717] sm:p-8">
         <div class="flex justify-between">
           <span class="text-xs font-black uppercase">Portfolio / 2026</span>
-          <span class="text-4xl font-black">✳</span>
+          <span class="text-4xl font-black" aria-hidden="true">✳</span>
         </div>
 
         <div>
@@ -207,82 +211,55 @@
       </div>
     </section>
 
-    <!-- MARQUEE -->
-    <div class="my-16 -rotate-1 border-y-[3px] border-[#171717] bg-[#171717] py-4 text-center text-[#eaff00]">
+    <div class="my-16 border-y-[3px] border-[#171717] bg-[#171717] py-4 text-center text-[#eaff00]">
       <p class="font-black uppercase tracking-widest">
         Build different ✳ Think bigger ✳ Ship better ✳
       </p>
     </div>
 
-    <!-- PROJECTS -->
     <section id="projects" class="scroll-mt-8 py-4">
-
       <p class="section-label">01 / Selected work</p>
-
-      <h2 class="section-title">
-        The Projects<span class="accent-text">.</span>
-      </h2>
+      <h2 class="section-title">The Projects<span class="accent-text">.</span></h2>
 
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
 
-        <article class="brutal-card bg-[#f4f0e8] p-5 text-[#171717] dark:bg-[#101010] dark:text-[#f4f0e8]">
-
+        <article id="work" class="brutal-card bg-[#f4f0e8] p-5 text-[#171717] dark:bg-[#101010] dark:text-[#f4f0e8]">
           <div class="mb-5 flex aspect-[4/3] items-center justify-center border-[3px] border-[#171717] bg-[#eaff00] text-6xl font-black text-[#171717]">
             WEB↗
           </div>
-
           <p class="text-xs font-black uppercase">PROJECT / 001</p>
           <h3 class="mt-2 text-2xl font-black uppercase">Personal Portfolio</h3>
-          <p class="mt-3 text-sm">
-            A bold digital home for showcasing skills, ideas, and creative work.
-          </p>
+          <p class="mt-3 text-sm">A bold digital home for showcasing skills, ideas, and creative work.</p>
         </article>
 
-        <article class="brutal-card bg-[#f4f0e8] p-5 text-[#171717] dark:bg-[#101010] dark:text-[#f4f0e8]">
-
+        <article id="work" class="brutal-card bg-[#f4f0e8] p-5 text-[#171717] dark:bg-[#101010] dark:text-[#f4f0e8]">
           <div class="mb-5 flex aspect-[4/3] items-center justify-center border-[3px] border-[#171717] bg-[#eaff00] text-5xl font-black text-[#171717]">
             SYSTEM
           </div>
-
           <p class="text-xs font-black uppercase">PROJECT / 002</p>
           <h3 class="mt-2 text-2xl font-black uppercase">Payroll System</h3>
-          <p class="mt-3 text-sm">
-            A system for simplifying employee records and payroll workflows.
-          </p>
+          <p class="mt-3 text-sm">A system for simplifying employee records and payroll workflows.</p>
         </article>
 
-        <article class="brutal-card bg-[#eaff00] p-5 text-[#171717]">
-
-          <span class="text-5xl font-black">???</span>
-
-          <h3 class="mt-6 text-3xl font-black uppercase">
-            Your project could be next.
-          </h3>
-
-          <p class="mt-4 text-sm font-bold">
-            Let's turn your idea into something real.
-          </p>
-
-          <a href="#contact" class="brutal-button mt-8 !border-[#171717] !bg-[#171717] !text-[#eaff00] !shadow-[4px_4px_0_#f4f0e8]">
+        <article id="work" class="brutal-card bg-[#eaff00] p-5 text-[#171717]">
+          <span class="text-5xl font-black" aria-hidden="true">???</span>
+          <h3 class="mt-6 text-3xl font-black uppercase">Your project could be next.</h3>
+          <p class="mt-4 text-sm font-bold">Let's turn your idea into something real.</p>
+          <a href="#contact"
+            class="brutal-button mt-8 !border-[#171717] !bg-[#171717] !text-[#eaff00] !shadow-[4px_4px_0_#f4f0e8]">
             Start a project ↗
           </a>
         </article>
-
       </div>
     </section>
 
-    <!-- SERVICES -->
     <section id="services" class="scroll-mt-8 py-20">
-
       <p class="section-label">02 / What I do</p>
-
-      <h2 class="section-title">
-        Useful skills.<br>Real solutions.
-      </h2>
+      <h2 class="section-title">Useful skills.<br>Real solutions.</h2>
 
       <div class="grid gap-4 sm:grid-cols-2">
 
-        <article class="brutal-card flex gap-4 bg-[#f4f0e8] p-5 text-[#171717] dark:bg-[#101010] dark:text-[#f4f0e8]">
+        <article id="one" class="brutal-card flex gap-4 bg-[#f4f0e8] p-5 text-[#171717] dark:bg-[#101010] dark:text-[#f4f0e8]">
           <span class="text-3xl font-black">01</span>
           <div>
             <h3 class="text-xl font-black uppercase">Website Creation</h3>
@@ -290,7 +267,7 @@
           </div>
         </article>
 
-        <article class="brutal-card flex gap-4 bg-[#f4f0e8] p-5 text-[#171717] dark:bg-[#101010] dark:text-[#f4f0e8]">
+        <article id="two" class="brutal-card flex gap-4 bg-[#f4f0e8] p-5 text-[#171717] dark:bg-[#101010] dark:text-[#f4f0e8]">
           <span class="text-3xl font-black">02</span>
           <div>
             <h3 class="text-xl font-black uppercase">System Development</h3>
@@ -298,7 +275,7 @@
           </div>
         </article>
 
-        <article class="brutal-card flex gap-4 bg-[#f4f0e8] p-5 text-[#171717] dark:bg-[#101010] dark:text-[#f4f0e8]">
+        <article id="one" class="brutal-card flex gap-4 bg-[#f4f0e8] p-5 text-[#171717] dark:bg-[#101010] dark:text-[#f4f0e8]">
           <span class="text-3xl font-black">03</span>
           <div>
             <h3 class="text-xl font-black uppercase">AI Automation</h3>
@@ -306,7 +283,7 @@
           </div>
         </article>
 
-        <article class="brutal-card flex gap-4 bg-[#f4f0e8] p-5 text-[#171717] dark:bg-[#101010] dark:text-[#f4f0e8]">
+        <article id="two" class="brutal-card flex gap-4 bg-[#f4f0e8] p-5 text-[#171717] dark:bg-[#101010] dark:text-[#f4f0e8]">
           <span class="text-3xl font-black">04</span>
           <div>
             <h3 class="text-xl font-black uppercase">Database Management</h3>
@@ -314,7 +291,7 @@
           </div>
         </article>
 
-        <article class="brutal-card flex gap-4 bg-[#f4f0e8] p-5 text-[#171717] dark:bg-[#101010] dark:text-[#f4f0e8]">
+        <article id="one" class="brutal-card flex gap-4 bg-[#f4f0e8] p-5 text-[#171717] dark:bg-[#101010] dark:text-[#f4f0e8]">
           <span class="text-3xl font-black">05</span>
           <div>
             <h3 class="text-xl font-black uppercase">Project Management</h3>
@@ -322,31 +299,25 @@
           </div>
         </article>
 
-        <article class="brutal-card flex gap-4 bg-[#f4f0e8] p-5 text-[#171717] dark:bg-[#101010] dark:text-[#f4f0e8]">
+        <article id="two" class="brutal-card flex gap-4 bg-[#f4f0e8] p-5 text-[#171717] dark:bg-[#101010] dark:text-[#f4f0e8]">
           <span class="text-3xl font-black">06</span>
           <div>
             <h3 class="text-xl font-black uppercase">Systems Analysis</h3>
             <p class="mt-2 text-sm">Identifying bottlenecks and designing better processes.</p>
           </div>
         </article>
-
       </div>
     </section>
 
-    <!-- CONTACT -->
-    <section id="contact" class="scroll-mt-8 border-[3px] border-[#171717] bg-[#eaff00] p-6 text-[#171717] shadow-[6px_6px_0_#171717] sm:p-10">
+    <section id="contact"
+      class="scroll-mt-8 border-[3px] border-[#171717] bg-[#eaff00] p-6 text-[#171717] shadow-[6px_6px_0_#171717] sm:p-10">
 
       <div class="grid gap-10 md:grid-cols-2">
-
         <div>
-          <p class="mb-4 text-xs font-black uppercase tracking-widest">
-            03 / Get in touch
-          </p>
-
+          <p class="mb-4 text-xs font-black uppercase tracking-widest">03 / Get in touch</p>
           <h2 class="text-5xl font-black uppercase leading-[0.9] tracking-tighter sm:text-7xl">
             LET'S<br>MAKE<br>IT HAPPEN.
           </h2>
-
           <p class="mt-6 font-bold leading-relaxed">
             Have a website, system, or automation idea?
             Let's discuss what we can build.
@@ -354,129 +325,180 @@
         </div>
 
         <form id="contactForm" class="space-y-5">
-
           <div>
-            <label for="name" class="mb-2 block text-sm font-black uppercase">
-              Your name *
-            </label>
-
-            <input
-              class="brutal-input"
-              type="text"
-              id="name"
-              name="name"
-              autocomplete="name"
-              required
-              placeholder="YOUR NAME">
+            <label for="name" class="mb-2 block text-sm font-black uppercase">Your name *</label>
+            <input class="brutal-input" type="text" id="name" name="name"
+              autocomplete="name" required maxlength="100" placeholder="YOUR NAME">
           </div>
 
           <div>
-            <label for="email" class="mb-2 block text-sm font-black uppercase">
-              Your email *
-            </label>
-
-            <input
-              class="brutal-input"
-              type="email"
-              id="email"
-              name="email"
-              autocomplete="email"
-              required
-              placeholder="YOU@EXAMPLE.COM">
+            <label for="email" class="mb-2 block text-sm font-black uppercase">Your email *</label>
+            <input class="brutal-input" type="email" id="email" name="email"
+              autocomplete="email" required maxlength="254" placeholder="YOU@EXAMPLE.COM">
           </div>
 
           <div>
-            <label for="message" class="mb-2 block text-sm font-black uppercase">
-              Your message *
-            </label>
-
-            <textarea
-              class="brutal-input"
-              id="message"
-              name="message"
-              rows="5"
-              required
+            <label for="message" class="mb-2 block text-sm font-black uppercase">Your message *</label>
+            <textarea class="brutal-input" id="message" name="message"
+              rows="5" required maxlength="5000"
               placeholder="TELL ME ABOUT YOUR IDEA"></textarea>
           </div>
 
-          <button type="submit" class="btn-primary w-full">
-            Send Message ↗
-          </button>
-
+          <button type="submit" class="btn-primary w-full">Validate Message ↗</button>
           <p id="formStatus" class="text-sm font-bold" role="status" aria-live="polite"></p>
         </form>
-
       </div>
     </section>
-
   </main>
 
-  <!-- FOOTER -->
   <footer class="mx-auto mt-12 max-w-6xl border-t-[3px] border-[#171717] px-5 py-8 dark:border-[#f4f0e8] sm:px-8">
-
     <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
-
-      <p class="text-xl font-black">
-        @http.anghell<span class="accent-text">.</span>
-      </p>
-
-      <p class="text-xs font-bold uppercase">
-        Designed to stand out. © <span id="year"></span>
-      </p>
-
-      <a href="#home" class="text-sm font-black uppercase underline decoration-4 underline-offset-4 hover:bg-[#eaff00] hover:text-[#171717]">
+      <p class="text-xl font-black">@http.anghell<span class="accent-text">.</span></p>
+      <p class="text-xs font-bold uppercase">Designed to stand out. © <span id="year"></span></p>
+      <a href="#home"
+        class="text-sm font-black uppercase underline decoration-4 underline-offset-4 hover:bg-[#eaff00] hover:text-[#171717]">
         Back to top ↑
       </a>
-
     </div>
   </footer>
 
-  <!-- JAVASCRIPT -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/gsap.min.js"> </script>
+  
+  <script> 
+
+  gsap.registerEffect({ name: "spin", defaults: { duration: 1 },
+  effect: (targets, config) => { return gsap.to(targets, { rotation: "+=360", duration: config.duration, 
+    ease: "power2.inOut", overwrite: "auto" }); }
+});
+
+  gsap.registerEffect({ name: "right", defaults: { duration: 0.3 },
+  effect: (targets, config) => { return gsap.to(targets, { scale: 1.02, duration: config.duration, 
+    ease: "power2.inOut", overwrite: "auto" }); }
+});
+
+  gsap.registerEffect({ name: "left", defaults: { duration: 0.3 },
+  effect: (targets, config) => { return gsap.to(targets, { scale: 1, duration: config.duration, 
+    ease: "power2.inOut", overwrite: "auto" }); }
+});
+
+document.querySelectorAll("#work").forEach((work) => {
+  work.addEventListener("mouseenter", () => { gsap.effects.spin(work);}); 
+});
+
+document.querySelectorAll("h1").forEach((h1) => {
+  h1.addEventListener("mouseenter", () => { gsap.effects.right(h1);});
+
+  h1.addEventListener("mouseleave", () => { gsap.effects.left(h1);});
+});
+
+document.querySelectorAll("#one").forEach((one) => {
+  one.addEventListener("mouseenter", () => { gsap.effects.right(one);});
+
+  one.addEventListener("mouseleave", () => { gsap.effects.left(one);});
+});
+
+document.querySelectorAll("#two").forEach((two) => {
+  two.addEventListener("mouseenter", () => { gsap.effects.right(two);});
+
+  two.addEventListener("mouseleave", () => { gsap.effects.left(two);});
+});
+
+  //Tween 
+    // console.log("Gsap ver", gsap.version); 
+    // gsap.to("h1", {rotation: 360, duration: 3}); 
+    // gsap.from("h1", {x: -160, opacity:0, duration: 1}); 
+    // gsap.fromTo("h1", {opacity: 0},{opacity: 1, duration: 3});
+
+  //Easing
+    // gsap.from("h1", {x: -160, opacity:0, duration: 1, ease: "back.out(2.5)"});
+    // gsap.from("#work", {y: -160, opacity:0, duration: 1, ease: "back.out(2.5)"});
+    // gsap.from("nav a", {y: -160, opacity:0, duration: 1, ease: "powe2.out", stagger: 0.3});
+    // gsap.from("button", {x: 160, opacity:0, duration: 1, ease: "back.out", stagger: 0.3});
+    // gsap.from("#box", {x: 160, opacity:0, duration: 1, ease: "back.out", stagger: 0.3});
+
+    gsap.from("#work", {y: -160, opacity:0, duration: 0.3, ease: "back.out(2.5)"});
+
+    const tl = gsap.timeline ({default: {ease: "power2.out"}});
+      tl.from("h1", {x: -160, opacity:0, duration: 0.5, ease: "back.out(2.5)"})
+      tl.from("nav a", {y: -160, opacity:0, duration: 0.3, ease: "powe2.out", stagger: 0.1})
+      tl.from("#toggledark", {rotation: 360, opacity:0, duration: 0.3, ease: "back.out", stagger: 0.1})
+      tl.from("#refresh", {x: 160, opacity:0, duration: 0.3, ease: "back.out", stagger: 0.1})
+      tl.from("#box", {x: 160, opacity:0, duration: 0.3, ease: "back.out", stagger: 0.1})
+      // tl.from("#work", {y: -160, opacity:0, duration: 0.3, ease: "back.out(2.5)"});
+
+  </script>
+
   <script>
-    const html = document.documentElement;
-    const themeButton = document.querySelector("#toggledark");
-    const themeColor = document.querySelector('meta[name="theme-color"]');
+    (() => {
+      "use strict";
 
-    function updateThemeColor() {
-      themeColor.content = html.classList.contains("dark")
-        ? "#101010"
-        : "#f4f0e8";
-    }
+      const html = document.documentElement;
+      const themeButton = document.querySelector("#toggledark");
+      const refreshButton = document.querySelector("#refresh");
+      const themeColor = document.querySelector('meta[name="theme-color"]');
+      const contactForm = document.querySelector("#contactForm");
+      const formStatus = document.querySelector("#formStatus");
 
-    try {
-      const savedTheme = localStorage.getItem("portfolio-theme");
-
-      if (savedTheme === "light") {
-        html.classList.remove("dark");
-      } else if (savedTheme === "dark") {
-        html.classList.add("dark");
+      function updateThemeColor() {
+        const isDark = html.classList.contains("dark");
+        themeColor.content = isDark ? "#101010" : "#f4f0e8";
+        themeButton.setAttribute("aria-pressed", String(isDark));
       }
-    } catch (error) {}
-
-    updateThemeColor();
-
-    themeButton.addEventListener("click", () => {
-      html.classList.toggle("dark");
 
       try {
-        localStorage.setItem(
-          "portfolio-theme",
-          html.classList.contains("dark") ? "dark" : "light"
-        );
-      } catch (error) {}
+        const savedTheme = localStorage.getItem("portfolio-theme");
+
+        if (savedTheme === "light") {
+          html.classList.remove("dark");
+        } else if (savedTheme === "dark") {
+          html.classList.add("dark");
+        }
+      } catch (error) {
+        // Storage may be unavailable.
+      }
 
       updateThemeColor();
-    });
 
-    document.querySelector("#year").textContent =
-      new Date().getFullYear();
+      themeButton.addEventListener("click", () => {
+        html.classList.toggle("dark");
+        gsap.from("#toggledark", {rotation: 360, opacity:0, duration: 0.3, ease: "back.out", stagger: 0.1})
 
-    document.querySelector("#contactForm").addEventListener("submit", (event) => {
-      event.preventDefault();
+        try {
+          localStorage.setItem(
+            "portfolio-theme",
+            html.classList.contains("dark") ? "dark" : "light"
+          );
+        } catch (error) {
+          // Theme switching still works without storage.
+        }
 
-      document.querySelector("#formStatus").textContent =
-        "Form validated! Connect an email service or backend to deliver messages.";
-    });
+        updateThemeColor();
+      });
+
+      refreshButton.addEventListener("click", () => {
+      const tl = gsap.timeline ({default: {ease: "power2.out"}});
+        tl.from("h1", {x: -160, opacity:0, duration: 0.5, ease: "back.out(2.5)"})
+        tl.from("nav a", {y: -160, opacity:0, duration: 0.3, ease: "powe2.out", stagger: 0.1})
+        tl.from("#toggledark", {rotation: 360, opacity:0, duration: 0.5, ease: "back.out", stagger: 0.1})
+        tl.from("#box", {x: 160, opacity:0, duration: 0.3, ease: "back.out", stagger: 0.1})
+        tl.from("#work", {y: -160, opacity:0, duration: 0.3, ease: "back.out(2.5)"});
+      });
+
+      document.querySelector("#year").textContent =
+        new Date().getFullYear();
+
+      contactForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        if (!contactForm.checkValidity()) {
+          contactForm.reportValidity();
+          return;
+        }
+
+        formStatus.textContent =
+          "Your information is valid. Connect a backend or email service to deliver your message.";
+      });
+    })();
   </script>
 
 </body>
